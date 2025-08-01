@@ -6,6 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -33,7 +35,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <Provider store={store}>
+          {children}
+        </Provider>
         <ScrollRestoration />
         <Scripts />
       </body>
