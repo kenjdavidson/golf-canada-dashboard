@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { selectAccessToken } from '../authSlice/selectors';
 import type { RootState } from '../index';
 
 export const api = createApi({
@@ -6,8 +7,8 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://scg.golfcanada.ca',
     prepareHeaders: (headers, { getState }) => {
-      // Get the token from the auth state
-      const token = (getState() as RootState).auth.token?.access_token;
+      // Get the token using the selector
+      const token = selectAccessToken(getState() as RootState);
       
       // If we have a token, add it to the headers
       if (token) {
