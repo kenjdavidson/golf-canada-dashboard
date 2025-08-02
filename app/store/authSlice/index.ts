@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { AuthStatus, type AuthState } from './types';
+import { authApi } from '../api/auth';
+import type { LoginResponse } from '../api/types';
 
 const initialState: AuthState = {
   user: null,
@@ -12,33 +14,47 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // We'll add synchronous reducers here later
-    // Example structure for future implementation:
-    /*
-    setUser: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
-    },
-    */
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.status = AuthStatus.UNAUTHENTICATED;
+    }
   },
   extraReducers: (builder) => {
-    // We'll add async reducers here later when we implement the thunks
-    // Example structure for future implementation:
-    /*
     builder
-      .addCase(login.pending, (state) => {
-        state.status = AuthStatus.AUTHENTICATING;
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.status = AuthStatus.AUTHENTICATED;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
-      */
+      // Handle login request lifecycle
+      .addMatcher(
+        authApi.endpoints.login.matchPending,
+        (state) => {
+          state.status = AuthStatus.AUTHENTICATING;
+        }
+      )
+      .addMatcher(
+        authApi.endpoints.login.matchFulfilled,
+        (state, { payload }) => {
+          state.status = AuthStatus.AUTHENTICATED;
+          state.user = payload.user;
+          state.token = {
+            token_type: payload.token_type,
+            access_token: payload.access_token,
+            expires_in: payload.expires_in,
+            refresh_token: payload.refresh_token,
+            id_token: payload.id_token,
+            expire_date: payload.expire_date
+          };
+        }
+      )
+      .addMatcher(
+        authApi.endpoints.login.matchRejected,
+        (state, { error }) => {
+          state.status = AuthStatus.UNAUTHENTICATED;
+          state.user = null;
+          state.token = null;
+        }
+      );
   },
 });
 
-export const { 
-  // We'll export action creators here later
-} = authSlice.actions;
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

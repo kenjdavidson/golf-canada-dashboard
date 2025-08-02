@@ -41,7 +41,7 @@ export interface User {
   isClubManagingUpgrades: boolean;
   allowScorePosting: boolean;
   subscriptionRenewsOn: string | null;
-  scoreDefaults: ScoreDefaults;
+  scoreDefaults?: ScoreDefaults;
 }
 
 export interface Token {
