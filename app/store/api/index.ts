@@ -7,14 +7,12 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://scg.golfcanada.ca',
     prepareHeaders: (headers, { getState }) => {
-      // Get the token using the selector
       const token = selectAccessToken(getState() as RootState);
-      
-      // If we have a token, add it to the headers
+
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
-
+      
       return headers;
     },
   }),

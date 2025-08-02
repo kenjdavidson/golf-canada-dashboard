@@ -1,5 +1,5 @@
-import authReducer from '../authSlice';
-import { AuthStatus } from '../authSlice/types';
+import authReducer from '../index';
+import { AuthStatus } from '../types';
 
 describe('auth reducer', () => {
   it('should handle initial state', () => {

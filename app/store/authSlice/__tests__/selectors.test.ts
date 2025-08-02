@@ -6,8 +6,8 @@ import {
   selectIsAuthenticated,
   selectAccessToken,
   selectAuthHeaders
-} from '../authSlice/selectors';
-import { AuthStatus } from '../authSlice/types';
+} from '../selectors';
+import { AuthStatus } from '../types';
 
 describe('Auth Selectors', () => {
   const mockUser = {
