@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { selectAccessToken } from '../authSlice/selectors';
+import { selectAccessToken } from '../auth/selectors';
 import type { RootState } from '../index';
 
 export const api = createApi({

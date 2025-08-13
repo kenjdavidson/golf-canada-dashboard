@@ -1,4 +1,4 @@
-import { User } from '~/store/authSlice/types';
+import { User } from '~/store/auth/types';
 import { api } from '../index';
 import { LoginResponse } from '../types';
 import { http, HttpResponse } from 'msw';

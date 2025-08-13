@@ -6,7 +6,7 @@ import type { RenderOptions } from '@testing-library/react';
 import type { PreloadedState } from '@reduxjs/toolkit';
 
 import { api } from '~/store/api';
-import authReducer from '~/store/authSlice';
+import authReducer from '~/store/auth';
 import type { RootState } from '~/store';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {

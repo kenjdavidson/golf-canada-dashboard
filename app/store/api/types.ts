@@ -1,4 +1,4 @@
-import { User } from "../authSlice/types";
+import { User } from "../auth/types";
 
 // Common response types will be defined here
 export interface ApiResponse<T> {
