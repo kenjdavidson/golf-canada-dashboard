@@ -19,7 +19,6 @@ export const api = createApi({
   endpoints: () => ({}), // We'll define endpoints in separate files
 });
 
-// Export hooks for usage in functional components
 export const {
   // We'll add endpoint hooks here as we create them
 } = api;
