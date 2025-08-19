@@ -1,5 +1,6 @@
-import notificationReducer, { addNotification, removeNotification } from '../index';
-import { NotificationType, type NotificationState } from '../types';
+import { describe, it, expect } from 'vitest'
+import notificationReducer, { addNotification, removeNotification } from '../index'
+import { NotificationType, type NotificationState } from '../types'
 
 describe('notification slice', () => {
   const initialState: NotificationState = {

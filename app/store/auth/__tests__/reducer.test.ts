@@ -1,5 +1,6 @@
-import authReducer from '../index';
-import { AuthStatus } from '../types';
+import { describe, it, expect } from 'vitest'
+import authReducer from '../index'
+import { AuthStatus } from '../types'
 
 describe('auth reducer', () => {
   it('should handle initial state', () => {

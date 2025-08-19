@@ -1,4 +1,5 @@
-import { NotificationType } from '../types';
+import { describe, it, expect } from 'vitest'
+import { NotificationType } from '../types'
 import {
   selectAllNotifications,
   selectNotificationById,
@@ -7,7 +8,7 @@ import {
   selectNotificationCountsByType,
   selectHasErrorNotifications,
   selectMostRecentNotification
-} from '../selectors';
+} from '../selectors'
 
 describe('notification selectors', () => {
   const mockNotifications = [

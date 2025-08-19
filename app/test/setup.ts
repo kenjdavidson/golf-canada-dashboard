@@ -1,20 +1,8 @@
-import { TextEncoder, TextDecoder } from 'util';
-import fetch, { Headers, Request, Response } from 'node-fetch';
+import { afterAll, afterEach, beforeAll } from 'vitest'
+import { setupServer } from 'msw/node'
 
-class MockBroadcastChannel {
-  constructor(channel: string) {}
-  postMessage(message: any) {}
-  close() {}
-  addEventListener(type: string, listener: EventListener) {}
-  removeEventListener(type: string, listener: EventListener) {}
-}
+export const server = setupServer()
 
-Object.defineProperties(globalThis, {
-  TextEncoder: { value: TextEncoder },
-  TextDecoder: { value: TextDecoder },
-  fetch: { value: fetch, writable: true },
-  Headers: { value: Headers },
-  Request: { value: Request },
-  Response: { value: Response },
-  BroadcastChannel: { value: MockBroadcastChannel }
-});
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
+afterAll(() => server.close())
+afterEach(() => server.resetHandlers())

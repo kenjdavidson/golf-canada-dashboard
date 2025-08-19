@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import {
   selectAuthState,
   selectUser,
@@ -6,8 +7,8 @@ import {
   selectIsAuthenticated,
   selectAccessToken,
   selectAuthHeaders
-} from '../selectors';
-import { AuthStatus } from '../types';
+} from '../selectors'
+import { AuthStatus } from '../types'
 
 describe('Auth Selectors', () => {
   const mockUser = {
