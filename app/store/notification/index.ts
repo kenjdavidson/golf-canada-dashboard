@@ -13,7 +13,7 @@ const notificationSlice = createSlice({
         addNotification: (state, action: PayloadAction<Omit<Notification, 'id'>>) => {
             const notification = {
                 ...action.payload,
-                id: uuidv4() 
+                id: uuidv4() // Generate a unique ID for each notification
             };
             state.notifications.push(notification);
         },

@@ -7,7 +7,7 @@ export enum NotificationType {
 export interface Notification {
     type: NotificationType;
     message: string;
-    id?: string; 
+    id?: string; // Added for easier management/removal
 }
 
 export interface NotificationState {
