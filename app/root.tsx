@@ -8,9 +8,11 @@ import {
 } from "react-router";
 import { Provider } from 'react-redux';
 import { store } from './store';
-
 import type { Route } from "./+types/root";
 import "./app.css";
+
+import pkg from '@material-tailwind/react';
+const {ThemeProvider} = pkg;
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -35,9 +37,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Provider store={store}>
-          {children}
-        </Provider>
+        <ThemeProvider>
+          <Provider store={store}>
+            {children}
+          </Provider>
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
