@@ -9,6 +9,7 @@ describe('Policy Page', () => {
 
   it('renders privacy policy heading', async () => {
     global.fetch = vi.fn().mockResolvedValueOnce({
+      ok: true,
       text: async () => '# Privacy Policy',
     });
 

@@ -1,6 +1,6 @@
 import type { Route } from "./+types/policy";
-import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import { useMarkdownContent } from "../hooks/useMarkdownContent";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,14 +10,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Policy() {
-  const [content, setContent] = useState<string>("");
-
-  useEffect(() => {
-    fetch("/content/privacy.md")
-      .then((response) => response.text())
-      .then((text) => setContent(text))
-      .catch((error) => console.error("Error loading privacy policy:", error));
-  }, []);
+  const content = useMarkdownContent("/content/privacy.md");
 
   return (
     <div className="prose dark:prose-invert max-w-none">

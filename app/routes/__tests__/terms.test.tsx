@@ -9,6 +9,7 @@ describe('Terms Page', () => {
 
   it('renders terms of service heading', async () => {
     global.fetch = vi.fn().mockResolvedValueOnce({
+      ok: true,
       text: async () => '# Terms of Service',
     });
 

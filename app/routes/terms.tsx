@@ -1,6 +1,6 @@
 import type { Route } from "./+types/terms";
-import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import { useMarkdownContent } from "../hooks/useMarkdownContent";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,14 +10,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Terms() {
-  const [content, setContent] = useState<string>("");
-
-  useEffect(() => {
-    fetch("/content/terms.md")
-      .then((response) => response.text())
-      .then((text) => setContent(text))
-      .catch((error) => console.error("Error loading terms of service:", error));
-  }, []);
+  const content = useMarkdownContent("/content/terms.md");
 
   return (
     <div className="prose dark:prose-invert max-w-none">
