@@ -12,7 +12,7 @@ export function Footer() {
             <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">
               Profile
             </h3>
-            <ul className="space-y-2">
+            <ul className="list-none space-y-2">
               <li>
                 <Link 
                   to="/profile" 
@@ -53,7 +53,7 @@ export function Footer() {
             <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">
               Management
             </h3>
-            <ul className="space-y-2">
+            <ul className="list-none space-y-2">
               <li>
                 <Link 
                   to="/courses" 
@@ -86,7 +86,7 @@ export function Footer() {
             <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">
               Legal
             </h3>
-            <ul className="space-y-2">
+            <ul className="list-none space-y-2">
               <li>
                 <Link 
                   to="/privacy" 
