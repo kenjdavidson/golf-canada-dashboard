@@ -1,6 +1,6 @@
 import type { Route } from "./+types/terms";
 import Markdown from "react-markdown";
-import { useMarkdownContent } from "../hooks/useMarkdownContent";
+import termsContent from "../../content/terms.md?raw";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,11 +10,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Terms() {
-  const content = useMarkdownContent("/content/terms.md");
-
   return (
     <div className="prose dark:prose-invert max-w-none">
-      <Markdown>{content}</Markdown>
+      <Markdown>{termsContent}</Markdown>
     </div>
   );
 }
