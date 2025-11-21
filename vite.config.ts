@@ -6,5 +6,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   base: "/golf-canada-dashboard/",
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  // Include markdown files as assets so they can be served from /public/content
   assetsInclude: ['**/*.md'],
 });
