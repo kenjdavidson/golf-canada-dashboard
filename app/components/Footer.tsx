@@ -110,12 +110,12 @@ export function Footer() {
         {/* Sub-footer */}
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400">
           <p>
-            © {currentYear} Golf Canada Dashboard | 
+            © {currentYear} Golf Canada Dashboard |{" "}
             <a 
               href="https://github.com/kenjdavidson/golf-canada-dashboard" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="ml-1 hover:text-gray-900 dark:hover:text-gray-100 transition-colors underline"
+              className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors underline"
             >
               GitHub Project
             </a>
