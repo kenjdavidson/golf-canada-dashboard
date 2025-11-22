@@ -1,6 +1,6 @@
-import type { Route } from "./+types/policy";
+import type { Route } from "./+types/privacy";
 import Markdown from "react-markdown";
-import { useMarkdownContent } from "../hooks/useMarkdownContent";
+import privacyContent from "../../content/privacy.md?raw";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -9,12 +9,10 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Policy() {
-  const content = useMarkdownContent("/content/privacy.md");
-
+export default function Privacy() {
   return (
     <div className="prose dark:prose-invert max-w-none">
-      <Markdown>{content}</Markdown>
+      <Markdown>{privacyContent}</Markdown>
     </div>
   );
 }
