@@ -7,4 +7,7 @@ export default defineConfig({
   base: "/golf-canada-dashboard/",
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   assetsInclude: ['**/*.md'],
+  optimizeDeps: {
+    include: ['@material-tailwind/react'],
+  },
 });
