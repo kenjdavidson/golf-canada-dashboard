@@ -11,9 +11,6 @@ import { store } from './store';
 import type { Route } from "./+types/root";
 import "./app.css";
 
-import pkg from '@material-tailwind/react';
-const {ThemeProvider} = pkg;
-
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -37,11 +34,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <ThemeProvider>
-          <Provider store={store}>
-            {children}
-          </Provider>
-        </ThemeProvider>
+        <Provider store={store}>
+          {children}
+        </Provider>
         <ScrollRestoration />
         <Scripts />
       </body>

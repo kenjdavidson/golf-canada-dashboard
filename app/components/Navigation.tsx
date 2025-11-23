@@ -1,9 +1,26 @@
-import { useState } from 'react';
-import pkg from '@material-tailwind/react';
-const { Button, IconButton } = pkg;
+import { useState, useEffect } from 'react';
+import * as MaterialTailwind from '@material-tailwind/react';
+const { Button, IconButton } = MaterialTailwind;
 
 export function Navigation() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    // Initialize from localStorage if available
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      return stored === 'dark';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    // Apply theme on mount
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+  }, []);
 
   const toggleTheme = () => {
     const newIsDark = !isDark;
@@ -11,8 +28,10 @@ export function Navigation() {
     const html = document.documentElement;
     if (newIsDark) {
       html.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       html.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   };
 
