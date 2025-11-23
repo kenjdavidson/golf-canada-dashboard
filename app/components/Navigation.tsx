@@ -13,14 +13,14 @@ export function Navigation() {
   });
 
   useEffect(() => {
-    // Apply theme on mount
+    // Apply theme on mount and when isDark changes
     const html = document.documentElement;
     if (isDark) {
       html.classList.add('dark');
     } else {
       html.classList.remove('dark');
     }
-  }, []);
+  }, [isDark]);
 
   const toggleTheme = () => {
     const newIsDark = !isDark;
