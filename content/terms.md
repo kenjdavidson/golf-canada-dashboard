@@ -111,4 +111,4 @@ By using this Service, you acknowledge that:
 
 ---
 
-**Remember:** For official Golf Canada services, information, and support, please visit [https://www.golfcanada.ca/](https://www.golfcanada.ca/).
+**Disclaimer:** For official Golf Canada services, information, and support, please visit [https://www.golfcanada.ca/](https://www.golfcanada.ca/).
