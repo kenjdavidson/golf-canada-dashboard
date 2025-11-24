@@ -3,8 +3,8 @@ import { describe, it, expect } from 'vitest';
 import Terms from '../terms';
 
 describe('Terms Page', () => {
-  it('renders terms of service heading', () => {
+  it('renders terms of use heading', () => {
     render(<Terms />);
-    expect(screen.getByText('Terms of Service')).toBeDefined();
+    expect(screen.getByText('Terms of Use')).toBeDefined();
   });
 });
