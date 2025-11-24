@@ -35,7 +35,6 @@ export function LoginForm({ onSubmit, onClear, errorMessages = [] }: LoginFormPr
           onChange={(e) => setUsername(e.target.value)}
           required
           className="w-full"
-          crossOrigin={undefined}
         />
       </div>
       <div>
@@ -46,7 +45,6 @@ export function LoginForm({ onSubmit, onClear, errorMessages = [] }: LoginFormPr
           onChange={(e) => setPassword(e.target.value)}
           required
           className="w-full"
-          crossOrigin={undefined}
         />
       </div>
       
