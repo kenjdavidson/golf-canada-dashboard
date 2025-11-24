@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import * as MaterialTailwind from '@material-tailwind/react';
 const { Button, IconButton } = MaterialTailwind;
 
@@ -37,14 +38,14 @@ export function Navigation() {
 
   return (
     <nav className="flex items-center justify-between py-4">
-      <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+      <Link to="/" className="text-xl font-semibold text-gray-900 dark:text-gray-100 hover:opacity-80 transition-opacity">
         Golf Canada
-      </h1>
+      </Link>
       <div className="flex items-center gap-2">
         <IconButton
           variant="text"
           onClick={toggleTheme}
-          className="rounded-full"
+          className="rounded-full p-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           {isDark ? (
             <svg
@@ -53,7 +54,7 @@ export function Navigation() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-5 h-5"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -68,7 +69,7 @@ export function Navigation() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-5 h-5"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -78,7 +79,11 @@ export function Navigation() {
             </svg>
           )}
         </IconButton>
-        <Button variant="text" size="sm">
+        <Button 
+          variant="text" 
+          size="sm"
+          className="px-4 py-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
           Login
         </Button>
       </div>
