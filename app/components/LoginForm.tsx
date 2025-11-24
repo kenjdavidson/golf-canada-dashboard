@@ -52,7 +52,7 @@ export function LoginForm({ onSubmit, onClear, errorMessages = [] }: LoginFormPr
       
       {errorMessages.length > 0 && (
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
-          <ul className="space-y-1">
+          <ul className="list-none space-y-1">
             {errorMessages.map((error, index) => (
               <li key={index} className="text-sm text-red-600 dark:text-red-400">
                 {error}
