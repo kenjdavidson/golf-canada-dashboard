@@ -10,4 +10,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@material-tailwind/react'],
   },
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
 });

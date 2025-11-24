@@ -79,13 +79,15 @@ export function Navigation() {
             </svg>
           )}
         </IconButton>
-        <Button 
-          variant="text" 
-          size="sm"
-          className="px-4 py-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
-          Login
-        </Button>
+        <Link to="/login">
+          <Button 
+            variant="text" 
+            size="sm"
+            className="px-4 py-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            Login
+          </Button>
+        </Link>
       </div>
     </nav>
   );
