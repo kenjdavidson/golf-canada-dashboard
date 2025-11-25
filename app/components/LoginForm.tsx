@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import * as MaterialTailwind from '@material-tailwind/react';
-const { Input, Button } = MaterialTailwind;
+import { Input, Button } from '@material-tailwind/react';
 
 interface LoginFormProps {
   onSubmit: (username: string, password: string) => void;
@@ -28,25 +27,29 @@ export function LoginForm({ onSubmit, onClear, errorMessages = [] }: LoginFormPr
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
+        <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Username
+        </label>
         <Input
+          id="username"
           type="text"
-          label="Username"
+          placeholder="Enter your username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          className="w-full"
-          labelProps={{ className: "dark:text-gray-300" }}
         />
       </div>
       <div>
+        <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Password
+        </label>
         <Input
+          id="password"
           type="password"
-          label="Password"
+          placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full"
-          labelProps={{ className: "dark:text-gray-300" }}
         />
       </div>
       
@@ -65,15 +68,15 @@ export function LoginForm({ onSubmit, onClear, errorMessages = [] }: LoginFormPr
       <div className="flex gap-2">
         <Button
           type="submit"
-          color="blue"
+          color="primary"
           className="flex-1"
         >
           Login
         </Button>
         <Button
           type="button"
-          variant="outlined"
-          color="blue"
+          variant="outline"
+          color="primary"
           onClick={handleClear}
           className="flex-1"
         >
