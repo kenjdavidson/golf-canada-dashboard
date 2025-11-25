@@ -44,7 +44,6 @@ export function Navigation() {
         <IconButton
           variant="ghost"
           onClick={toggleTheme}
-          className="rounded-full p-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           {isDark ? (
             <svg
@@ -80,9 +79,8 @@ export function Navigation() {
         </IconButton>
         <Link to="/login">
           <Button 
-            variant="ghost" 
+            variant="solid" 
             size="sm"
-            className="px-4 py-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
             Login
           </Button>
