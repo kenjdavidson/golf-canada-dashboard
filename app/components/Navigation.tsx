@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import * as MaterialTailwind from '@material-tailwind/react';
-const { Button, IconButton } = MaterialTailwind;
+import { Button, IconButton } from '@material-tailwind/react';
 
 export function Navigation() {
   const [isDark, setIsDark] = useState(() => {
@@ -43,7 +42,7 @@ export function Navigation() {
       </Link>
       <div className="flex items-center gap-2">
         <IconButton
-          variant="text"
+          variant="ghost"
           onClick={toggleTheme}
           className="rounded-full p-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
         >
@@ -81,7 +80,7 @@ export function Navigation() {
         </IconButton>
         <Link to="/login">
           <Button 
-            variant="text" 
+            variant="ghost" 
             size="sm"
             className="px-4 py-2 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
