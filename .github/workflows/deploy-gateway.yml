@@ -1,0 +1,65 @@
+name: Deploy API Gateway
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+      aws_region:
+        description: 'AWS Region to deploy to'
+        required: true
+        default: 'us-east-1'
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ github.event.inputs.aws_region }}
+
+      - name: Setup SAM CLI
+        uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+
+      - name: SAM Build
+        working-directory: gateway
+        run: sam build
+
+      - name: SAM Deploy
+        working-directory: gateway
+        run: |
+          sam deploy \
+            --stack-name golf-canada-proxy-${{ github.event.inputs.environment }} \
+            --no-confirm-changeset \
+            --no-fail-on-empty-changeset \
+            --capabilities CAPABILITY_IAM \
+            --region ${{ github.event.inputs.aws_region }} \
+            --resolve-s3
+
+      - name: Output API Endpoint
+        working-directory: gateway
+        run: |
+          aws cloudformation describe-stacks \
+            --stack-name golf-canada-proxy-${{ github.event.inputs.environment }} \
+            --query 'Stacks[0].Outputs[?OutputKey==`ApiEndpoint`].OutputValue' \
+            --output text

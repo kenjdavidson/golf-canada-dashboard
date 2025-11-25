@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Golf Canada Dashboard API Gateway Proxy
+  This SAM template creates an HTTP API Gateway that proxies requests to the
+  Golf Canada API to get around CORS restrictions.
+
+Parameters:
+  TargetUrl:
+    Type: String
+    Description: The target URL to proxy requests to
+    Default: https://scg.golfcanada.ca
+
+Globals:
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,PUT,DELETE,PATCH,OPTIONS'"
+      AllowHeaders: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+      AllowOrigin: "'*'"
+
+Resources:
+  ProxyApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: prod
+      CorsConfiguration:
+        AllowMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - PATCH
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+          - Authorization
+          - X-Amz-Date
+          - X-Api-Key
+          - X-Amz-Security-Token
+        AllowOrigins:
+          - http://localhost:3000
+          - http://localhost:5173
+          - https://kenjdavidson.com
+          - https://www.kenjdavidson.com
+        MaxAge: 600
+
+  ProxyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: golf-canada-proxy
+      Runtime: nodejs20.x
+      Handler: index.handler
+      CodeUri: src/
+      Timeout: 30
+      MemorySize: 256
+      Environment:
+        Variables:
+          TARGET_URL: !Ref TargetUrl
+      Events:
+        ProxyAll:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ProxyApi
+            Path: /{proxy+}
+            Method: ANY
+
+Outputs:
+  ApiEndpoint:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${ProxyApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
