@@ -9,54 +9,15 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  
-  /* MaterialTailwind theme colors */
-  --color-primary: rgb(30 41 59);
-  --color-primary-dark: rgb(15 23 42);
-  --color-primary-light: rgb(51 65 85);
-  --color-primary-foreground: rgb(248 250 252);
-  
-  --color-secondary: rgb(226 232 240);
-  --color-secondary-dark: rgb(203 213 225);
-  --color-secondary-light: rgb(241 245 249);
-  --color-secondary-foreground: rgb(2 6 23);
-  
-  --color-info: rgb(0 98 255);
-  --color-info-dark: rgb(0 85 221);
-  --color-info-light: rgb(0 122 255);
-  --color-info-foreground: rgb(248 250 252);
-  
-  --color-success: rgb(0 191 107);
-  --color-success-dark: rgb(0 163 95);
-  --color-success-light: rgb(2 229 133);
-  --color-success-foreground: rgb(248 250 252);
-  
-  --color-warning: rgb(252 163 39);
-  --color-warning-dark: rgb(246 125 10);
-  --color-warning-light: rgb(253 186 76);
-  --color-warning-foreground: rgb(248 250 252);
-  
-  --color-error: rgb(239 68 68);
-  --color-error-dark: rgb(220 38 38);
-  --color-error-light: rgb(248 113 113);
-  --color-error-foreground: rgb(248 250 252);
-  
-  --color-surface: rgb(226 232 240);
-  --color-surface-dark: rgb(203 213 225);
-  --color-surface-light: rgb(241 245 249);
-  --color-surface-foreground: rgb(2 6 23);
-  
-  --color-background: rgb(255 255 255);
-  --color-foreground: rgb(71 85 105);
-  --color-black: rgb(2 6 23);
-  --color-white: rgb(255 255 255);
-  
-  --radius: 1.5rem;
 }
 
 @variant dark (&:where(.dark, .dark *));
 
-/* MaterialTailwind base styles - CSS variables for components */
+/* 
+ * MaterialTailwind CSS variables for component styling.
+ * These use space-separated RGB values (e.g., "30 41 59") which MaterialTailwind
+ * uses with rgb() function for alpha support: rgb(var(--color-primary) / <alpha>)
+ */
 :root {
   --color-primary: 30 41 59;
   --color-primary-dark: 15 23 42;
