@@ -44,6 +44,7 @@ export function Navigation() {
         <IconButton
           variant="ghost"
           onClick={toggleTheme}
+          className="border-0"
         >
           {isDark ? (
             <svg
