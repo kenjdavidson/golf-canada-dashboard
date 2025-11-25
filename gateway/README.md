@@ -4,8 +4,7 @@ This AWS SAM application creates an HTTP API Gateway that proxies requests to th
 
 ## Architecture
 
-- **AWS HTTP API Gateway**: Handles incoming requests and CORS preflight responses
-- **AWS Lambda Function**: Proxies requests to the Golf Canada API
+- **AWS HTTP API Gateway**: Handles incoming requests, CORS preflight responses, and proxies requests directly to the target API using HTTP_PROXY integration (no Lambda required)
 
 ## CORS Configuration
 
@@ -20,18 +19,6 @@ The proxy allows requests from the following origins:
 
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) configured with appropriate credentials
-
-## Local Development
-
-To run the API locally:
-
-```bash
-cd gateway
-sam build
-sam local start-api
-```
-
-This will start a local API Gateway on `http://localhost:3000`.
 
 ## Deployment
 
@@ -55,11 +42,11 @@ sam deploy --guided
 
 Follow the prompts to configure your deployment settings.
 
-## Environment Variables
+## Parameters
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `TARGET_URL` | The target API URL to proxy requests to | `https://scg.golfcanada.ca` |
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `TargetUrl` | The target API URL to proxy requests to | `https://scg.golfcanada.ca` |
 
 ## API Usage
 
@@ -70,4 +57,4 @@ Once deployed, you can make requests to the API Gateway endpoint:
 curl https://<api-id>.execute-api.<region>.amazonaws.com/prod/api/golfers/123
 ```
 
-All HTTP methods (GET, POST, PUT, DELETE, PATCH) and paths are proxied to the target URL.
+All HTTP methods (GET, POST, PUT, DELETE, PATCH, HEAD) and paths are proxied to the target URL.
