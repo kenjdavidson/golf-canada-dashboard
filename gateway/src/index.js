@@ -18,14 +18,17 @@ const ALLOWED_ORIGINS = [
 
 /**
  * Get CORS headers based on the request origin.
+ * Returns null if origin is not allowed.
  * @param {string} origin - The origin from the request
- * @returns {object} CORS headers
+ * @returns {object|null} CORS headers or null if origin is not allowed
  */
 function getCorsHeaders(origin) {
-  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  if (!ALLOWED_ORIGINS.includes(origin)) {
+    return null;
+  }
   
   return {
-    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token',
     'Access-Control-Max-Age': '600'
@@ -40,6 +43,17 @@ function getCorsHeaders(origin) {
 exports.handler = async (event) => {
   const origin = event.headers?.origin || event.headers?.Origin || '';
   const corsHeaders = getCorsHeaders(origin);
+
+  // Reject requests from unauthorized origins
+  if (!corsHeaders) {
+    return {
+      statusCode: 403,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ error: 'Forbidden', message: 'Origin not allowed' })
+    };
+  }
 
   // Handle preflight OPTIONS requests
   if (event.requestContext.http.method === 'OPTIONS') {
@@ -73,6 +87,31 @@ exports.handler = async (event) => {
     };
   }
 };
+
+/**
+ * Content types that should be treated as text (not binary).
+ */
+const TEXT_CONTENT_TYPES = [
+  'text/',
+  'application/json',
+  'application/xml',
+  'application/javascript',
+  'application/x-www-form-urlencoded',
+  'application/xhtml+xml',
+  'application/html',
+  '+json',
+  '+xml'
+];
+
+/**
+ * Check if a content type represents text content.
+ * @param {string} contentType - The content type header value
+ * @returns {boolean} True if content is text, false if binary
+ */
+function isTextContent(contentType) {
+  const lowerContentType = contentType.toLowerCase();
+  return TEXT_CONTENT_TYPES.some(type => lowerContentType.includes(type));
+}
 
 /**
  * Proxy the request to the target URL.
@@ -118,26 +157,24 @@ async function proxyRequest(event) {
         const buffer = Buffer.concat(chunks);
         const contentType = res.headers['content-type'] || 'application/json';
         
-        // Check if response is binary
-        const isBinary = !contentType.includes('text') && 
-                         !contentType.includes('json') && 
-                         !contentType.includes('xml');
+        // Check if response is text or binary
+        const isText = isTextContent(contentType);
         
         resolve({
           statusCode: res.statusCode,
           contentType: contentType,
-          body: isBinary ? buffer.toString('base64') : buffer.toString('utf8'),
-          isBase64Encoded: isBinary
+          body: isText ? buffer.toString('utf8') : buffer.toString('base64'),
+          isBase64Encoded: !isText
         });
       });
     });
 
     req.on('error', reject);
 
-    // Send request body if present
+    // Send request body if present, preserving binary data
     if (event.body) {
       const body = event.isBase64Encoded 
-        ? Buffer.from(event.body, 'base64').toString('utf8')
+        ? Buffer.from(event.body, 'base64')
         : event.body;
       req.write(body);
     }

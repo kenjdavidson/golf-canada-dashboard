@@ -11,13 +11,6 @@ Parameters:
     Description: The target URL to proxy requests to
     Default: https://scg.golfcanada.ca
 
-Globals:
-  Api:
-    Cors:
-      AllowMethods: "'GET,POST,PUT,DELETE,PATCH,OPTIONS'"
-      AllowHeaders: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
-      AllowOrigin: "'*'"
-
 Resources:
   ProxyApi:
     Type: AWS::Serverless::HttpApi
