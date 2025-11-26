@@ -61,7 +61,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+    <div className="flex flex-col-reverse lg:flex-row gap-8 max-w-6xl mx-auto">
       {/* Left Column - Login Information */}
       <div className="flex-1 prose dark:prose-invert max-w-none">
         <Markdown
