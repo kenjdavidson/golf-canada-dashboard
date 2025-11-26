@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 const socialLinks = [
   {
     name: 'Facebook',
+    ariaLabel: 'Follow Golf Canada on Facebook',
     url: 'https://www.facebook.com/GolfCanada/',
     icon: (
       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -11,7 +12,8 @@ const socialLinks = [
     ),
   },
   {
-    name: 'X (Twitter)',
+    name: 'X',
+    ariaLabel: 'Follow Golf Canada on X',
     url: 'https://twitter.com/GolfCanada',
     icon: (
       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -21,6 +23,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
+    ariaLabel: 'Follow Golf Canada on Instagram',
     url: 'https://www.instagram.com/golfcanada/',
     icon: (
       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -30,6 +33,7 @@ const socialLinks = [
   },
   {
     name: 'YouTube',
+    ariaLabel: 'Subscribe to Golf Canada on YouTube',
     url: 'https://www.youtube.com/c/golfcanada',
     icon: (
       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -158,7 +162,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-                  aria-label={social.name}
+                  aria-label={social.ariaLabel}
                 >
                   {social.icon}
                 </a>
