@@ -89,7 +89,7 @@ export default function Login() {
       </div>
 
       {/* Right Column - Login Form */}
-      <div className="flex-1 max-w-md">
+      <div className="flex-1 w-full lg:max-w-md">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
           <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Sign In

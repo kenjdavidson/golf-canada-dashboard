@@ -77,4 +77,44 @@ describe('Login Page', () => {
     expect(flexContainer?.className).toContain('flex-col-reverse');
     expect(flexContainer?.className).toContain('lg:flex-row');
   });
+
+  it('renders login form column with full width on mobile and constrained on desktop', () => {
+    vi.mocked(useSelector).mockReturnValue(AuthStatus.UNAUTHENTICATED);
+    
+    const store = configureStore({
+      reducer: {
+        auth: authReducer,
+        [api.reducerPath]: api.reducer,
+      },
+      middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(api.middleware),
+      preloadedState: {
+        auth: {
+          user: null,
+          token: null,
+          status: AuthStatus.UNAUTHENTICATED,
+        },
+      },
+    });
+
+    const { container } = render(
+      <Provider store={store}>
+        <Login />
+      </Provider>
+    );
+
+    // Get the login form column (parent of the "Sign In" heading)
+    const signInHeading = screen.getByText('Sign In');
+    const formCard = signInHeading.closest('.bg-white');
+    const formColumn = formCard?.parentElement;
+    
+    expect(formColumn).toBeTruthy();
+    
+    // Verify w-full is applied for full width on mobile
+    expect(formColumn?.className).toContain('w-full');
+    // Verify lg:max-w-md is applied for constrained width on desktop only
+    expect(formColumn?.className).toContain('lg:max-w-md');
+    // Verify max-w-md without the lg: prefix is NOT applied (would constrain mobile width)
+    expect(formColumn?.className).not.toMatch(/(?<![a-z]:)max-w-md/);
+  });
 });
