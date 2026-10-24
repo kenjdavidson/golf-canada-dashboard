@@ -32,6 +32,8 @@ The proxy allows requests from the following origins:
 
 Note: You must configure the `AWS_ROLE_ARN` secret in your repository settings.
 
+To tear down the gateway, use the **Undeploy API Gateway** workflow with the same environment and AWS region.
+
 ### Manual Deployment
 
 ```bash

@@ -1,0 +1,50 @@
+name: Undeploy API Gateway
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to undeploy from'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+      aws_region:
+        description: 'AWS Region to undeploy from'
+        required: true
+        default: 'us-east-1'
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  undeploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ github.event.inputs.aws_region }}
+
+      - name: Setup SAM CLI
+        uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+
+      - name: SAM Delete
+        working-directory: gateway
+        run: |
+          sam delete \
+            --stack-name golf-canada-proxy-${{ github.event.inputs.environment }} \
+            --no-prompts \
+            --region ${{ github.event.inputs.aws_region }}
